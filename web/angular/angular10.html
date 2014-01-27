@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular10学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript">
+    $(document).ready(function($scope) {
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+</head>
+<body>
+    <div ng-show="true">1</div>
+    <div ng-show="false">2</div>
+    <div ng-hide="true">3</div>
+    <div ng-hide="false">4</div>
+
+    <div ng-init="a=2">
+        <ul ng-switch on="a">
+            <li ng-switch-when="1">1</li>
+            <li ng-switch-when="2">2</li>
+            <li ng-switch-default>other</li>
+        </ul>
+    </div>
+</body>
+</html>

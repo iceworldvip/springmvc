@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular11学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript">
+    var TestCtrl = function($scope) {
+        $scope.see = function() {
+            console.log($scope.test_form);
+            console.log($scope.test_form.a);
+        };
+    };
+    $(document).ready(function() {
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+</head>
+<body>
+    <form action="" name="test_form" ng-controller="TestCtrl">
+        <input type="text" name="a" required="required" ng-model="a" /><br />
+        <span ng-click="see()">{{test_form.$valid}}</span>
+    </form>
+</body>
+</html>

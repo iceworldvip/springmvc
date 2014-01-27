@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular06学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript">
+    var TestCtrl = function($scope) {
+        $scope.style = {
+            width : 100 + 'px'
+        };
+    };
+    $(document).ready(function() {
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+</head>
+<body>
+    <div ng-controller="TestCtrl">
+        <div style="width: 10px; height: 10px; background-color: red;"
+            ng-style="style"></div>
+        <input type="text" name="width" ng-model="style.width" />
+    </div>
+</body>
+</html>

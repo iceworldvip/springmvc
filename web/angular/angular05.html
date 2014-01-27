@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular05学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript">
+    var TestCtrl = function($scope, $element) {
+        $scope.width = 100;
+
+        $scope.$watch('width', function(to, from) {
+            $element.children(':first').width(to);
+        });
+
+        $scope.click = function() {
+            var number = parseInt($scope.width, 10);
+            $scope.width = ++number;
+        };
+    };
+    $(document).ready(function() {
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+</head>
+<body>
+    <div ng-controller="TestCtrl">
+        <div style="width: 100px; height: 10px; background-color: red;"></div>
+        <input type="text" name="width" ng-model="width" /><br />
+        <input type="button" value="增值" ng-click="click()" />
+    </div>
+</body>
+</html>

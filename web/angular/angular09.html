@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular09学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript">
+    var TestCtrl = function($scope) {
+    };
+    $(document).ready(function() {
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+<style type="text/css">
+.cls {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.odd {
+    background-color: aqua;
+}
+
+.even {
+    background-color: navy;
+}
+</style>
+</head>
+<body>
+    <div ng-style="{width:100+'px',height:100+'px',backgroundColor:'red'}"></div>
+    <div ng-controller="TestCtrl" ng-class="'cls'"></div>
+
+    <div ng-init="l=[1,2,3,4]">
+        <li ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="m in l">{{m}}</li>
+    </div>
+</body>
+</html>

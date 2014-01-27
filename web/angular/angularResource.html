@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angularResource学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript">
+    var projectName = '/' + window.location.pathname.split('/')[1];
+    $(document).ready(function() {
+        angular.module('ngView', [], function($routeProvider) {
+            $routeProvider.when(projectName + '/user/userList', {
+                template : '{{title}}',
+                controller : function($scope, $routeParams) {
+                    $scope.title = $routeParams.title;
+                }
+            });
+        });
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+</head>
+<body>
+    <div ng-view></div>
+</body>
+</html>

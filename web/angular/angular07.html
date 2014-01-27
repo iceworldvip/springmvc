@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<meta charset="UTF-8">
+<title>angular07学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/ng-template" id="tpl">
+here, {{1+1}}
+</script>
+</head>
+<body>
+    <div ng-include src="'./template/tpl.html'"></div>
+    <div ng-include src="'tpl'"></div>
+    <div ng-include src="v"></div>
+    <div>
+        <input type="button" value="加载" ng-click="v='tpl'" />
+    </div>
+</body>
+</html>

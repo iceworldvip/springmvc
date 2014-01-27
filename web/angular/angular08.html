@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular08学习示例</title>
+<script type="text/javascript" src="../js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../js/angular.js"></script>
+<script type="text/javascript">
+    var TestCtrl = function($scope) {
+        $scope.arrays = [ 1, 2, 3, 4, 5 ];
+        $scope.list = [ {
+            name : 'a'
+        }, {
+            name : 'b'
+        }, {
+            name : 'c'
+        } ];
+    };
+    $(document).ready(function() {
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+</head>
+<body>
+    <div ng-controller="TestCtrl" ng-init="arr=[9,8,7,6,5]">
+        <ul ng-repeat="member in arrays">
+            <li>{{$index}} , {{member}}</li>
+        </ul>
+        <ul ng-repeat="member in list">
+            <li>{{$first}} , {{member}}</li>
+        </ul>
+        <ul ng-repeat="member in arr">
+            <li>{{$middle}} , {{member}}</li>
+        </ul>
+    </div>
+</body>
+</html>

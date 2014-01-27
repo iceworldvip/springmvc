@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>angular04学习示例</title>
+<script src="../js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    var TestCtrl = function($scope, $element) {
+        $scope.a = 1;
+
+        $scope.click = function() {
+            $scope.a = parseInt($scope.a) + 1;
+        };
+    };
+    $(document).ready(function() {
+        angular.bootstrap(document.documentElement);
+    });
+</script>
+</head>
+<body ng-controller="TestCtrl">
+    <input type="text" name="test" value="" id="test" ng-model="a" />
+    <input type="button" name="button" value="增值" id="button" ng-click="click()" />
+</body>
+</html>

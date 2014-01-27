@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>angular03学习示例</title>
+        <script src="../js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            var input_value;
+            var TestDivCtrl = function($scope) {
+                $scope.a = '123';
+
+                $scope.click = function() {
+                    var number = parseInt($scope.a);
+                    $scope.a = ++number;
+                };
+            };
+            var TestInputCtrl = function($scope) {
+                input_value = $scope;
+            };
+            var TestButtonCtrl = function($scope) {
+                $scope.click = function() {
+                    if (isNaN(input_value.b)) {
+                        input_value.b = 0;
+                    }
+                    input_value.b = parseInt(input_value.b) + 1;
+                };
+            };
+            $(document).ready(function() {
+                angular.bootstrap(document.documentElement);
+            });
+        </script>
+    </head>
+    <body>
+        <div id="test" ng-controller="TestDivCtrl" ng-click="click()">
+            {{a}}
+        </div>
+        <input type="text" name="input_value" value="" id="input_value" ng-controller="TestInputCtrl" ng-model="b"/>
+        <input type="button" name="button" value="增值" id="button" ng-controller="TestButtonCtrl" ng-click="click()"/>
+    </body>
+</html>
