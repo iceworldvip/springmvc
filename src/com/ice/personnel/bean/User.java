@@ -1,5 +1,7 @@
 package com.ice.personnel.bean;
 
+
+
 /**
  * @author ice
  * 
