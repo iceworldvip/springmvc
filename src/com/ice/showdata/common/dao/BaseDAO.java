@@ -1,4 +1,4 @@
-package com.ice.common.dao;
+package com.ice.showdata.common.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

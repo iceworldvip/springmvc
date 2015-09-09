@@ -1,71 +1,93 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>首页</title>
-        <script src="js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript" charset="utf-8">
-            window.onload = function() {
-                var url = window.location.origin + '/' + window.location.pathname.split('/')[1];
-                var result;
-                var page = 1;
-                var pageSize = 20;
-                var getXMLHttpRequest = function() {
-                    var xmlhttp;
-                    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                        xmlhttp = new XMLHttpRequest();
-                    } else {// code for IE6, IE5
-                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-                    return xmlhttp;
-                };
-                document.getElementById('addUser').addEventListener('click', function() {
-                    var xmlhttp = getXMLHttpRequest();
-                    xmlhttp.open('post', url + '/user/addUser', true);
-                    xmlhttp.send();
-                }, false);
-                document.getElementById('getUserList').addEventListener('click', function() {
-                    alert('getUserList');
-                    var xmlhttp = getXMLHttpRequest();
-                    xmlhttp.open('post', url + '/user/getUserList', false);
-                    xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xmlhttp.onreadystatechange = function() {
-                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                            result1 = xmlhttp.responseText;
-                            result = eval('(' + xmlhttp.responseText + ')');
-                            var foreach = document.getElementById('foreach');
-                            var html = '';
-                            for (var i = 0; (i < 1) && (result.userList.length > 0); i++) {
-                                var user = result.userList[i];
-                                html += '<tr>';
-                                for (var prop in user) {
-                                    if (user.hasOwnProperty(prop)) {
-                                        html += '<td>' + prop + '</td>';
-                                    }
-                                }
-                                html += '</tr>';
-                            }
-                            for (var i = 0; i < result.userList.length; i++) {
-                                var user = result.userList[i];
-                                html += '<tr>';
-                                for (var prop in user) {
-                                    if (user.hasOwnProperty(prop)) {
-                                        html += '<td>' + user[prop] + '</td>';
-                                    }
-                                }
-                                html += '</tr>';
-                            }
-                            foreach.innerHTML = html;
-                        }
-                    };
-                    xmlhttp.send('page=' + page + '&pageSize=' + pageSize);
-                }, true);
-            };
-        </script>
-    </head>
-    <body>
-        <input type="button" id="addUser" value="添加用户" />
-        <input type="button" id="getUserList" value="分页获取用户列表" />
-        <table id="foreach" border="1"></table>
-    </body>
+<html ng-app>
+<head>
+<meta charset="UTF-8">
+<title>首页</title>
+<script type="text/javascript" src="js/jquery-1.11.0.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/angular.min.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    var url = window.location.origin + '/' + window.location.pathname.split('/')[1];
+    var page = 1;
+    var pageSize = 20;
+    var test;
+    $.noConflict();
+    function showUserList($scope, $http) {
+        $http.get(url + '/user/userList?page=' + page + '&pageSize=' + pageSize).success(function(data) {
+            $scope.userList = data;
+        });
+        test = $scope;
+    }
+    window.onload = function() {
+        var transactionButton = document.getElementById('transactionButton');
+        transactionButton.onclick = function() {
+            jQuery.ajax({
+                url : url + '/user/transaction',
+                aysnc : false,
+                type : 'post'
+            });
+        };
+    };
+</script>
+</head>
+<body>
+	<input type="button" id="addUser" value="添加用户" />
+	<form action="" id="user">
+		<table>
+			<tr>
+				<td>用户名：</td>
+				<td><input type="text" id="user.username" name="username" /></td>
+			</tr>
+			<tr>
+				<td>密码：</td>
+				<td><input type="password" id="user.password" name="password" /></td>
+			</tr>
+			<tr>
+				<td>真实姓名：</td>
+				<td><input type="text" id="user.realname" name="realname" /></td>
+			</tr>
+			<tr>
+				<td>电子邮箱：</td>
+				<td><input type="text" id="user.email" name="email" /></td>
+			</tr>
+			<tr>
+				<td>地址：</td>
+				<td><input type="text" id="user.address" name="address" /></td>
+			</tr>
+			<tr>
+				<td>邮政编码：</td>
+				<td><input type="text" id="user.zip" name="zip" /></td>
+			</tr>
+			<tr>
+				<td>身份证：</td>
+				<td><input type="text" id="user.identityCard" name="identityCard" /></td>
+			</tr>
+		</table>
+	</form>
+	<input type="button" id="getUserList" value="分页获取用户列表" />
+	<table ng-controller="showUserList" id="foreach" border="1">
+		<tr>
+			<th>序号</th>
+			<th>uuid</th>
+			<th>用户名</th>
+			<th>密码</th>
+			<th>真实姓名</th>
+			<th>电子邮箱</th>
+			<th>地址</th>
+			<th>邮政编码</th>
+			<th>身份证</th>
+		</tr>
+		<tr ng-repeat="user in userList">
+			<td>{{$index+1}}</td>
+			<td>{{user.id}}</td>
+			<td>{{user.username}}</td>
+			<td>{{user.password}}</td>
+			<td>{{user.realname}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.address}}</td>
+			<td>{{user.zip}}</td>
+			<td>{{user.identityCard}}</td>
+		</tr>
+	</table>
+	<input type="button" id="transactionButton" value="事务测试" />
+</body>
 </html>
